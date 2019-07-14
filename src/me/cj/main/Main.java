@@ -52,6 +52,7 @@ public class Main extends JavaPlugin {
 		slime();
 		spiderweb();
 		stoneBricks();
+		tnt();
 		wooltoString();
 		zombieHeadToLeather();
 		// Furnace
@@ -59,6 +60,18 @@ public class Main extends JavaPlugin {
 		ironDoorToIron();
 
 		getLogger().info(numberOfRecipes + " recipes loaded");
+	}
+
+	private void tnt() {
+		String[][] shapes = { { "## ", "## ", "   " }, { " ##", " ##", "   " }, { "   ", "## ", "## " },
+				{ "   ", " ##", " ##" } };
+
+		for (int shapeNum = 0; shapeNum < shapes.length; shapeNum++) {
+			ShapedRecipe tnt = new ShapedRecipe(new NamespacedKey(this, "tnt" + shapeNum), new ItemStack(Material.TNT, 3));
+			tnt.shape(shapes[shapeNum]).setIngredient('#', Material.FIREWORK_ROCKET);
+			addRecipe(tnt);
+		}
+
 	}
 
 	private void elytra() {
