@@ -12,11 +12,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 	static final Material[] woodTypes = { Material.OAK_WOOD, Material.SPRUCE_WOOD, Material.BIRCH_WOOD,
-			Material.JUNGLE_WOOD, Material.ACACIA_WOOD, Material.DARK_OAK_WOOD };
+			Material.JUNGLE_WOOD, Material.ACACIA_WOOD, Material.DARK_OAK_WOOD, Material.MANGROVE_WOOD,
+			Material.CRIMSON_HYPHAE, Material.WARPED_HYPHAE };
 	static final Material[] woodPlankTypes = { Material.OAK_PLANKS, Material.SPRUCE_PLANKS, Material.BIRCH_PLANKS,
-			Material.JUNGLE_PLANKS, Material.ACACIA_PLANKS, Material.DARK_OAK_PLANKS };
+			Material.JUNGLE_PLANKS, Material.ACACIA_PLANKS, Material.DARK_OAK_PLANKS, Material.MANGROVE_PLANKS,
+			Material.CRIMSON_PLANKS, Material.WARPED_PLANKS };
 	static final Material[] woodSlabTypes = { Material.OAK_SLAB, Material.SPRUCE_SLAB, Material.BIRCH_SLAB,
-			Material.JUNGLE_SLAB, Material.ACACIA_SLAB, Material.DARK_OAK_SLAB };
+			Material.JUNGLE_SLAB, Material.ACACIA_SLAB, Material.DARK_OAK_SLAB, Material.MANGROVE_SLAB,
+			Material.CRIMSON_SLAB, Material.WARPED_SLAB };
 	static final Material[] woolColors = { Material.WHITE_WOOL, Material.ORANGE_WOOL, Material.MAGENTA_WOOL,
 			Material.LIGHT_BLUE_WOOL, Material.YELLOW_WOOL, Material.LIME_WOOL, Material.PINK_WOOL, Material.GRAY_WOOL,
 			Material.LIGHT_GRAY_WOOL, Material.CYAN_WOOL, Material.PURPLE_WOOL, Material.BLUE_WOOL, Material.BROWN_WOOL,
@@ -29,6 +32,7 @@ public class Main extends JavaPlugin {
 
 		// Crafting
 		chainedArmor();
+		cobbledDeepslate();
 		elytra();
 		glowstoneToDust();
 		goldenApple();
@@ -37,9 +41,21 @@ public class Main extends JavaPlugin {
 		jukeBox();
 		lead();
 		mossyCobbleToCobble();
+		mossyCobbleStairsToCobbleStairs();
+		mossyCobbleSlabToCobbleSlab();
 		mossyCobbleWallToCobbleWall();
 		mossyCobblestone();
 		mossyStoneBrickToStoneBrick();
+		mossyStoneBrickStairsToStoneBrickStairs();
+		mossyStoneBrickSlabToStoneBrickSlab();
+		mossyStoneBrickWallToStoneBrickWall();
+		crackedDeepslateBricksToCobbledDeepslate();
+		crackedDeepslateTilesToCobbledDeepslate();
+		crackedNetherBricksToNetherrack();
+		crackedPolishedBlackstoneBricksToBlackstone();
+		chiseledPolishedBlackstoneToBlackstone();
+		polishedBlackstoneToBlackstone();
+		polishedBlackstoneBricksToBlackstone();
 		nameTag();
 		netherwartBlockToNetherwart();
 		polishedAndesiteToAndesite();
@@ -58,8 +74,113 @@ public class Main extends JavaPlugin {
 		// Furnace
 		goldSwordToGold();
 		ironDoorToIron();
+		// Stunecutter
 
 		getLogger().info(numberOfRecipes + " recipes loaded");
+	}
+
+	private void polishedBlackstoneBricksToBlackstone() {
+		ShapelessRecipe polishedBlackstoneBricksToBlackstone = new ShapelessRecipe(
+				new NamespacedKey(this, "polishedBlackstoneBricksToBlackstone"), new ItemStack(Material.BLACKSTONE, 1));
+		polishedBlackstoneBricksToBlackstone.addIngredient(Material.POLISHED_BLACKSTONE_BRICKS);
+		addRecipe(polishedBlackstoneBricksToBlackstone);
+	}
+
+	private void polishedBlackstoneToBlackstone() {
+		ShapelessRecipe polishedBlackstoneToBlackstone = new ShapelessRecipe(
+				new NamespacedKey(this, "polishedBlackstoneToBlackstone"), new ItemStack(Material.BLACKSTONE, 1));
+		polishedBlackstoneToBlackstone.addIngredient(Material.POLISHED_BLACKSTONE);
+		addRecipe(polishedBlackstoneToBlackstone);
+	}
+
+	private void chiseledPolishedBlackstoneToBlackstone() {
+		ShapelessRecipe chiseledPolishedBlackstoneToBlackstone = new ShapelessRecipe(
+				new NamespacedKey(this, "chiseledPolishedBlackstoneToBlackstone"),
+				new ItemStack(Material.BLACKSTONE, 1));
+		chiseledPolishedBlackstoneToBlackstone.addIngredient(Material.CHISELED_POLISHED_BLACKSTONE);
+		addRecipe(chiseledPolishedBlackstoneToBlackstone);
+	}
+
+	private void crackedPolishedBlackstoneBricksToBlackstone() {
+		ShapelessRecipe crackedPolishedBlackstoneBricksToBlackstone = new ShapelessRecipe(
+				new NamespacedKey(this, "crackedPolishedBlackstoneBricksToBlackstone"),
+				new ItemStack(Material.BLACKSTONE, 1));
+		crackedPolishedBlackstoneBricksToBlackstone.addIngredient(Material.CRACKED_POLISHED_BLACKSTONE_BRICKS);
+		addRecipe(crackedPolishedBlackstoneBricksToBlackstone);
+	}
+
+	private void crackedNetherBricksToNetherrack() {
+		ShapelessRecipe crackedNetherBricksToNetherrack = new ShapelessRecipe(
+				new NamespacedKey(this, "crackedNetherBricksToNetherrack"), new ItemStack(Material.NETHERRACK, 1));
+		crackedNetherBricksToNetherrack.addIngredient(Material.CRACKED_NETHER_BRICKS);
+		addRecipe(crackedNetherBricksToNetherrack);
+	}
+
+	private void crackedDeepslateTilesToCobbledDeepslate() {
+		ShapelessRecipe crackedDeepslateTilesToCobbledDeepslate = new ShapelessRecipe(
+				new NamespacedKey(this, "crackedDeepslateTilesToCobbledDeepslate"),
+				new ItemStack(Material.COBBLED_DEEPSLATE, 1));
+		crackedDeepslateTilesToCobbledDeepslate.addIngredient(Material.CRACKED_DEEPSLATE_TILES);
+		addRecipe(crackedDeepslateTilesToCobbledDeepslate);
+	}
+
+	private void crackedDeepslateBricksToCobbledDeepslate() {
+		ShapelessRecipe crackedDeepslateBricksToCobbledDeepslate = new ShapelessRecipe(
+				new NamespacedKey(this, "crackedDeepslateBricksToCobbledDeepslate"),
+				new ItemStack(Material.COBBLED_DEEPSLATE, 1));
+		crackedDeepslateBricksToCobbledDeepslate.addIngredient(Material.CRACKED_DEEPSLATE_BRICKS);
+		addRecipe(crackedDeepslateBricksToCobbledDeepslate);
+	}
+
+	private void mossyStoneBrickWallToStoneBrickWall() {
+		ShapelessRecipe mossyStoneBrickWallToStoneBrickWall = new ShapelessRecipe(
+				new NamespacedKey(this, "mossyStoneBrickWallToStoneBrickWall"),
+				new ItemStack(Material.STONE_BRICK_WALL, 1));
+		mossyStoneBrickWallToStoneBrickWall.addIngredient(Material.MOSSY_STONE_BRICK_WALL);
+		addRecipe(mossyStoneBrickWallToStoneBrickWall);
+	}
+
+	private void mossyStoneBrickSlabToStoneBrickSlab() {
+		ShapelessRecipe mossyStoneBrickSlabToStoneBrickSlab = new ShapelessRecipe(
+				new NamespacedKey(this, "mossyStoneBrickSlabToStoneBrickSlab"),
+				new ItemStack(Material.STONE_BRICK_SLAB, 1));
+		mossyStoneBrickSlabToStoneBrickSlab.addIngredient(Material.MOSSY_STONE_BRICK_SLAB);
+		addRecipe(mossyStoneBrickSlabToStoneBrickSlab);
+	}
+
+	private void mossyStoneBrickStairsToStoneBrickStairs() {
+		ShapelessRecipe mossyStoneBrickStairsToStoneBrickStairs = new ShapelessRecipe(
+				new NamespacedKey(this, "mossyStoneBrickStairsToStoneBrickStairs"),
+				new ItemStack(Material.STONE_BRICK_STAIRS, 1));
+		mossyStoneBrickStairsToStoneBrickStairs.addIngredient(Material.MOSSY_STONE_BRICK_STAIRS);
+		addRecipe(mossyStoneBrickStairsToStoneBrickStairs);
+	}
+
+	private void mossyCobbleSlabToCobbleSlab() {
+		ShapelessRecipe mossyCobbleSlabToCobbleSlab = new ShapelessRecipe(
+				new NamespacedKey(this, "mossyCobbleSlabToCobbleSlab"), new ItemStack(Material.COBBLESTONE_SLAB, 1));
+		mossyCobbleSlabToCobbleSlab.addIngredient(Material.MOSSY_COBBLESTONE_SLAB);
+		addRecipe(mossyCobbleSlabToCobbleSlab);
+	}
+
+	private void mossyCobbleStairsToCobbleStairs() {
+		ShapelessRecipe mossyCobbleStairsToCobbleStairs = new ShapelessRecipe(
+				new NamespacedKey(this, "mossyCobbleStairsToCobbleStairs"),
+				new ItemStack(Material.COBBLESTONE_STAIRS, 1));
+		mossyCobbleStairsToCobbleStairs.addIngredient(Material.MOSSY_COBBLESTONE_STAIRS);
+		addRecipe(mossyCobbleStairsToCobbleStairs);
+	}
+
+	private void cobbledDeepslate() {
+		String[][] shapes = { { "## ", "## ", "   " }, { " ##", " ##", "   " }, { "   ", "## ", "## " },
+				{ "   ", " ##", " ##" } };
+
+		for (int shapeNum = 0; shapeNum < shapes.length; shapeNum++) {
+			ShapedRecipe cobbledDeepSlate = new ShapedRecipe(new NamespacedKey(this, "cobbledDeepSlate" + shapeNum),
+					new ItemStack(Material.COBBLED_DEEPSLATE, 2));
+			cobbledDeepSlate.shape(shapes[shapeNum]).setIngredient('#', Material.COBBLESTONE);
+			addRecipe(cobbledDeepSlate);
+		}
 	}
 
 	private void tnt() {
@@ -67,7 +188,8 @@ public class Main extends JavaPlugin {
 				{ "   ", " ##", " ##" } };
 
 		for (int shapeNum = 0; shapeNum < shapes.length; shapeNum++) {
-			ShapedRecipe tnt = new ShapedRecipe(new NamespacedKey(this, "tnt" + shapeNum), new ItemStack(Material.TNT, 3));
+			ShapedRecipe tnt = new ShapedRecipe(new NamespacedKey(this, "tnt" + shapeNum),
+					new ItemStack(Material.TNT, 3));
 			tnt.shape(shapes[shapeNum]).setIngredient('#', Material.FIREWORK_ROCKET);
 			addRecipe(tnt);
 		}
@@ -338,5 +460,9 @@ public class Main extends JavaPlugin {
 				new ItemStack(Material.LEATHER, 2));
 		zombieHeadToLeather.addIngredient(Material.ZOMBIE_HEAD);
 		addRecipe(zombieHeadToLeather);
+	}
+
+	public void consoleMessage(String message) {
+		getLogger().info(message);
 	}
 }
